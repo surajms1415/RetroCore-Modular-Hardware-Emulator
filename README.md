@@ -1,72 +1,53 @@
-# Modular Hardware Rust
+# RetroCore — 8-Bit Console Emulator
 
-# RetroCore — Game Boy Emulator in Rust
+### About the Project
 
-RetroCore is a modular emulator for the original Nintendo Game Boy (DMG), developed using Rust. It recreates essential hardware components, including the CPU, memory system, graphics, audio, and input controls, to execute compatible Game Boy ROMs.
+RetroCore is a Rust-based systems programming project that brings the classic Game Boy hardware environment to modern computers. It recreates the internal operations of an 8-bit gaming console, allowing compatible ROMs to execute through software-based hardware simulation.
 
-## Features
+Rather than relying on physical console components, RetroCore processes machine instructions, manages memory access, generates graphics and audio, and handles player input through a modular emulation engine.
 
-- **CPU:** Sharp LR35902 instruction execution, CB-prefixed opcodes, interrupts, and instruction timing.
-- **Memory Bus:** Centralized memory mapping and communication between hardware components.
-- **Graphics (PPU):** Scanline-based rendering of backgrounds, windows, and sprites at 160 × 144 resolution.
-- **Audio (APU):** Four-channel sound emulation with PCM audio output.
-- **Cartridge Support:** ROM loading with ROM-only, MBC1, and MBC3 memory banking.
-- **Joypad:** Keyboard-based controls with interrupt handling.
-- **Timers:** Emulation of DIV, TIMA, TMA, and TAC registers.
+## Key Capabilities
 
-## Tech Stack
+- **Instruction Processing:** Executes Sharp LR35902 CPU instructions with register operations, interrupts, and timing management.
+- **Hardware Simulation:** Connects memory, timers, graphics, audio, and cartridge controllers through a shared system bus.
+- **Visual Rendering:** Reconstructs classic Game Boy graphics using scanline-based background, window, and sprite rendering.
+- **Sound Generation:** Simulates four hardware audio channels for real-time sound output.
+- **ROM Compatibility:** Supports homebrew Game Boy ROMs with ROM-only, MBC1, and MBC3 cartridge configurations.
+- **Interactive Controls:** Maps keyboard inputs to the original console's directional and action buttons.
 
-- **Language:** Rust
-- **Build Tool:** Cargo
-- **Concepts:** Systems Programming, CPU Emulation, Memory Management, Computer Architecture
+## Getting Started
 
-## Installation and Usage
+**Prerequisites:** Rust, Cargo, and a compatible `.gb` ROM.
 
-**Requirements:** Rust, Cargo, and a compatible `.gb` ROM file.
-
-Build the project:
+Build:
 
 ```bash
 cargo build --release
 ```
 
-Run the emulator:
+Run:
 
 ```bash
 cargo run --release -- <path-to-rom.gb>
 ```
 
-## Keyboard Controls
+## Controls
 
-| Game Boy Button | Keyboard |
+| Action | Key |
 |---|---|
-| Directional Pad | Arrow Keys |
+| Movement | Arrow Keys |
 | A / B | Z / X |
-| Start | Enter |
-| Select | Right Shift |
-| Quit | Escape |
-
-## Project Structure
-
-```text
-src/
-├── main.rs        # Application initialization
-├── cpu.rs         # CPU instruction execution
-├── bus.rs         # Memory mapping and timers
-├── ppu.rs         # Graphics rendering
-├── sound.rs       # Audio processing
-├── cartridge.rs   # ROM loading and banking
-└── joypad.rs      # Controller input
-```
+| Start / Select | Enter / Right Shift |
+| Exit | Escape |
 
 ## Testing
 
-Supports Blargg-style diagnostic ROMs using serial registers (`0xFF01` and `0xFF02`). Test messages are displayed in the terminal to assist with debugging and hardware validation.
+RetroCore supports serial-based diagnostic output from compatible Game Boy test ROMs, helping validate CPU execution and hardware behavior.
 
-## Limitations
+## Technical Notes
 
-The emulator focuses on compatibility with standard homebrew ROMs rather than complete cycle accuracy. Certain hardware-specific behaviors, including pixel-level PPU timing, DMA transfer delays, timer glitches, and advanced audio quirks, are simplified.
+The emulator prioritizes practical ROM compatibility over perfect hardware timing. Some advanced behaviors involving graphics timing, DMA transfers, timers, and audio are simplified.
 
-## Purpose
+## Learning Outcomes
 
-RetroCore demonstrates practical applications of **Rust, low-level systems programming, instruction execution, memory-mapped I/O, and modular hardware simulation**.
+This project explores core systems engineering concepts such as CPU architecture, instruction decoding, memory-mapped I/O, interrupt processing, hardware abstraction, and modular software development in Rust.
